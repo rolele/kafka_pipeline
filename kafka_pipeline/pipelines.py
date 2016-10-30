@@ -7,7 +7,7 @@
 from scrapy.utils.serialize import ScrapyJSONEncoder
 
 from twisted.internet import defer
-from kafka import KafkaClient, SimpleProducer
+from kafka import KafkaProducer
 from kafka.common import KafkaUnavailableError
 import json
 import datetime as dt
@@ -27,8 +27,7 @@ class KafkaPipeline(object):
 
     @classmethod
     def from_settings(cls, settings):
-        kafka = KafkaClient("kafka:9092")
-        producer = SimpleProducer(kafka)
+        producer = KafkaProducer(bootstrap_servers="kafka:9092")
         return cls(producer, kafka)
 
     @classmethod
@@ -51,9 +50,8 @@ class KafkaPipeline(object):
             topic = "kafkapipeline"
             self.kafka.ensure_topic_exists(topic)
             spider.logger.debug(message)
-            self.producer.send_messages(topic, message.encode('utf-8'))
             spider.logger.debug("Item processed in KafkaPipeline")
-            yield self.producer.send_messages(topic, message)
+            yield self.producer.send_messages(topic, message.encode('utf-8'))
         except:
             spider.logger.debug(traceback.format_exc())
             raise
