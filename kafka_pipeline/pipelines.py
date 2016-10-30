@@ -47,7 +47,7 @@ class KafkaPipeline(object):
                 raise
 
             topic = "kafkapipeline"
-            self.kafka.ensure_topic_exists(topic)
+            #self.kafka.ensure_topic_exists(topic)
             spider.logger.debug(message)
             spider.logger.debug("Item processed in KafkaPipeline")
             yield self.producer.send(topic, message.encode('utf-8'))
