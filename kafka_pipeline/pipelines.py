@@ -21,14 +21,13 @@ class KafkaPipeline(object):
     Pushes a serialized item to appropriate Kafka topics.
     '''
 
-    def __init__(self, producer, aKafka):
+    def __init__(self, producer):
         self.producer = producer
-        self.kafka = aKafka
 
     @classmethod
     def from_settings(cls, settings):
         producer = KafkaProducer(bootstrap_servers="kafka:9092")
-        return cls(producer, kafka)
+        return cls(producer)
 
     @classmethod
     def from_crawler(cls, crawler):
@@ -51,7 +50,7 @@ class KafkaPipeline(object):
             self.kafka.ensure_topic_exists(topic)
             spider.logger.debug(message)
             spider.logger.debug("Item processed in KafkaPipeline")
-            yield self.producer.send_messages(topic, message.encode('utf-8'))
+            yield self.producer.send(topic, message.encode('utf-8'))
         except:
             spider.logger.debug(traceback.format_exc())
             raise
