@@ -13,10 +13,10 @@ from kafka_pipeline.items import PropertiesItem
 
 class SpiderSpider(CrawlSpider):
     name = "spider"
-    allowed_domains = ["web.local"]
+    allowed_domains = ["web"]
     # Start on the first index page
     start_urls = (
-        'http://web.local:9312/properties/index_00000.html',
+        'http://web:9312/properties/index_00000.html',
     )
 
     # Rules for horizontal and vertical crawling
