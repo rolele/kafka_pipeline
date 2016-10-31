@@ -13,7 +13,7 @@ from kafka_pipeline.items import PropertiesItem
 import logging
 from sys import platform
 logger = logging.getLogger()
-address = '/var/run/syslog' if platform == 'darwin' else '/dev/log'
+address = '/var/log/syslog'
 handler = logging.handlers.SysLogHandler(address=address)
 logger.addHandler(handler)
 
