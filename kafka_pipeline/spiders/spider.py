@@ -13,7 +13,7 @@ from kafka_pipeline.items import PropertiesItem
 import logging
 from sys import platform
 logger = logging.getLogger()
-address = '/dev/log'
+address = '/dev/stdout'
 handler = logging.handlers.SysLogHandler(address=address)
 logger.addHandler(handler)
 
