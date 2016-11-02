@@ -11,10 +11,9 @@ from scrapy.loader import ItemLoader
 from kafka_pipeline.items import PropertiesItem
 
 import logging
-from sys import platform
+import logging.handlers
 logger = logging.getLogger()
-address = '/var/log/syslog'
-handler = logging.handlers.SysLogHandler(address=address)
+handler = logging.handlers.SysLogHandler(facility=logging.handlers.SysLogHandler.LOG_DAEMON, address='/var/log/syslog')
 logger.addHandler(handler)
 
 from twisted.python import log
