@@ -10,6 +10,17 @@ from scrapy.loader import ItemLoader
 
 from kafka_pipeline.items import PropertiesItem
 
+import logging
+from sys import platform
+logger = logging.getLogger()
+address = '/var/log/syslog'
+handler = logging.handlers.SysLogHandler(address=address)
+logger.addHandler(handler)
+
+from twisted.python import log
+observer = log.PythonLoggingObserver()
+observer.start()
+
 class SpiderSpider(CrawlSpider):
     name = "spider"
     allowed_domains = ["web"]
