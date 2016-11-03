@@ -10,15 +10,14 @@ from scrapy.loader import ItemLoader
 
 from kafka_pipeline.items import PropertiesItem
 
-#import logging
-#import logging.handlers
-#logger = logging.getLogger()
-#handler = logging.handlers.SysLogHandler(facility=logging.handlers.SysLogHandler.LOG_DAEMON, address='/var/log/syslog')
-#logger.addHandler(handler)
-
-#from twisted.python import log
-#observer = log.PythonLoggingObserver()
-#observer.start()
+import logging
+import logging.handlers
+logger = logging.getLogger()
+handler = logging.handlers.SysLogHandler(facility=logging.handlers.SysLogHandler.LOG_DAEMON, address='/dev/log')
+logger.addHandler(handler)
+from twisted.python import log
+observer = log.PythonLoggingObserver()
+observer.start()
 
 class SpiderSpider(CrawlSpider):
     name = "spider"
