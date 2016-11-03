@@ -13,7 +13,7 @@ BOT_NAME = 'kafka_pipeline'
 
 SPIDER_MODULES = ['kafka_pipeline.spiders']
 NEWSPIDER_MODULE = 'kafka_pipeline.spiders'
-LOG_STDOUT = True
+#LOG_STDOUT = True
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'kafka_pipeline (+http://www.yourdomain.com)'
